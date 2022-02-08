@@ -1,58 +1,59 @@
-import React, { useState } from "react";
-import Box from "@material-ui/core/Box";
-import Backdrop from "@material-ui/core/Backdrop";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { Redirect, Route, RouteComponentProps, Switch } from "react-router-dom";
-import { AxiosResponse } from "axios";
+import React, { useState } from 'react'
+import Box from '@material-ui/core/Box'
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { AxiosResponse } from 'axios'
 
-import Menu from "./components/menu";
-import SystemsApp from "./apps/system_index_app";
-import RequestApp from "./apps/request_index_app";
-import CommandsApp from "./apps/command_index_app";
-import RequestViewApp from "./apps/request_view_app";
-import SystemsAdminApp from "./apps/system_admin_app";
-import GardensAdminApp from "./apps/garden_admin_app";
-import JobsApp from "./apps/job_index_app";
-import JobViewApp from "./apps/job_view_app";
-import GardenViewApp from "./apps/garden_view_app";
-import JobCreateApp from "./apps/job_create_app";
-import CommandViewApp from "./apps/command_view_app";
-import SystemsService from "./services/system_service";
-import NamespacesService from "./services/namespace_service";
+import Menu from './components/menu'
+// import SystemsApp from './apps/system_index_app'
+// import RequestApp from './apps/request_index_app'
+// import CommandsApp from './apps/command_index_app'
+// import RequestViewApp from './apps/request_view_app'
+// import SystemsAdminApp from './apps/system_admin_app'
+// import GardensAdminApp from './apps/garden_admin_app'
+// import JobsApp from './apps/job_index_app'
+// import JobViewApp from './apps/job_view_app'
+// import GardenViewApp from './apps/garden_view_app'
+// import JobCreateApp from './apps/job_create_app'
+import CommandViewApp from './apps/command_view_app'
+import SystemsService from './services/system_service'
+import NamespacesService from './services/namespace_service'
 import {
-  CommandParams,
-  GardenNameParam,
+  // CommandParams,
+  // GardenNameParam,
   System,
-  IdParam,
-} from "./custom_types/custom_types";
+  // IdParam,
+} from './custom_types/custom_types'
 
 const App = (): JSX.Element => {
-  const [systems, setSystems] = useState<System[]>([]);
-  const [namespaces, setNamespaces] = useState<string[]>([]);
+  const [systems, setSystems] = useState<System[]>([])
+  const [namespaces, setNamespaces] = useState<string[]>([])
 
   if (!systems[0]) {
-    SystemsService.getSystems(successCallback);
-    NamespacesService.getNamespaces(successNamespaceCallback);
+    SystemsService.getSystems(successCallback)
+    NamespacesService.getNamespaces(successNamespaceCallback)
   }
 
   function successCallback(response: AxiosResponse) {
-    setSystems(response.data);
+    setSystems(response.data)
   }
 
   function successNamespaceCallback(response: AxiosResponse) {
-    setNamespaces(response.data);
+    setNamespaces(response.data)
   }
   if (systems[0] && namespaces[0]) {
     return (
       <Box>
         <Menu />
         <Box px={2}>
-          <Switch>
-            <Route
+          <Routes>
+            <Route path="/systems/:namespace/:system_name/:version/commands/:command_name/">
+              <CommandViewApp systems={systems} />
+            </Route>
+            {/* <Route
               path="/systems/:namespace/:system_name/:version/commands/:command_name/"
-              component={(routeProps: RouteComponentProps<CommandParams>) => (
-                <CommandViewApp systems={systems} {...routeProps} />
-              )}
+              component={() => {<CommandViewApp systems={systems} />}}
             />
             <Route
               path="/systems/:namespace/:system_name/:version/"
@@ -79,10 +80,7 @@ const App = (): JSX.Element => {
             <Route
               path="/admin/systems"
               component={() => (
-                  <SystemsAdminApp
-                      namespaces={namespaces}
-                      systems={systems}
-                  />
+                <SystemsAdminApp namespaces={namespaces} systems={systems} />
               )}
             />
             <Route
@@ -114,12 +112,12 @@ const App = (): JSX.Element => {
                 <JobViewApp {...routeProps} />
               )}
             />
-            <Route path="/jobs" component={() => <JobsApp />} />
-            <Redirect to="/systems" />
-          </Switch>
+            <Route path="/jobs" component={() => <JobsApp />} /> */}
+            <Navigate to="/systems" />
+          </Routes>
         </Box>
       </Box>
-    );
+    )
   } else {
     return (
       <Box>
@@ -128,8 +126,8 @@ const App = (): JSX.Element => {
           <CircularProgress color="inherit" />
         </Backdrop>
       </Box>
-    );
+    )
   }
-};
+}
 
-export default App;
+export default App
