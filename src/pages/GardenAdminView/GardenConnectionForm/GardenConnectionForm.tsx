@@ -2,10 +2,12 @@ import { Box, Button, Divider } from '@mui/material'
 import { Form, Formik } from 'formik'
 import { useState } from 'react'
 import { Garden } from '../garden-admin-view-types'
-import ConnectionHttpValues from './form-components/ConnectionHttpValues'
-import ConnectionMethod from './form-components/ConnectionMethod'
-import ConnectionStompValues from './form-components/ConnectionStompValues'
-import SubmissionStatusSnackbar from './form-components/SubmissionStatusSnackbar'
+import {
+  ConnectionHttpValues,
+  ConnectionMethod,
+  ConnectionStompValues,
+  SubmissionStatusSnackbar,
+} from './form-components'
 import {
   connectionInitialValues,
   connectionValidationSchema,
@@ -56,4 +58,4 @@ const GardenConnectionForm = ({ garden }: GardenConnectionFormProps) => {
   )
 }
 
-export default GardenConnectionForm
+export { GardenConnectionForm }

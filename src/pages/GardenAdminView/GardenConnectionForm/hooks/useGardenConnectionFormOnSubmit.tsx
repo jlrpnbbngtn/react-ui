@@ -6,7 +6,7 @@ import { Garden } from '../../garden-admin-view-types'
 import {
   ConnectionFormFields,
   StompHeader,
-} from '../form-components/ConnectionFormFields'
+} from '../form-components/connection-form-types'
 import { SubmissionStatusState } from '../GardenConnectionForm'
 
 /**
@@ -84,6 +84,7 @@ const updateConnection = (
 
 /**
  * Translate Formik form's data into connection parameters for beergarden
+ *
  * @param methodParams
  * @returns Connection parameters for beergarden
  */

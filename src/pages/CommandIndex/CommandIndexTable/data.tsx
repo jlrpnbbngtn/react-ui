@@ -1,18 +1,18 @@
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { Box, IconButton, Tooltip } from '@mui/material'
 import useAxios from 'axios-hooks'
 import {
+  ChangeEvent as ReactChangeEvent,
   useCallback,
   useEffect,
   useMemo,
   useState,
-  ChangeEvent as ReactChangeEvent,
 } from 'react'
-import { Column } from 'react-table'
-import { System, Command } from '../../../types/custom_types'
 import { useParams } from 'react-router-dom'
-import MakeItHappenButton from '../MakeItHappenButton'
-import { Box, IconButton, Tooltip } from '@mui/material'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { Column } from 'react-table'
+import { Command, System } from 'types/custom_types'
 import { ServerConfigContainer } from '../../../containers/ConfigContainer'
+import MakeItHappenButton from '../MakeItHappenButton'
 
 export type CommandIndexTableData = {
   namespace: string

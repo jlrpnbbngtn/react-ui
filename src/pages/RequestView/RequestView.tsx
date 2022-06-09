@@ -13,15 +13,15 @@ import {
   Typography,
 } from '@mui/material'
 import useAxios from 'axios-hooks'
+import Breadcrumbs from 'components/Breadcrumbs'
+import PageHeader from 'components/PageHeader'
+import RequestsTable from 'components/table'
+import { ServerConfigContainer } from 'containers/ConfigContainer'
 import { useEffect, useState } from 'react'
 import ReactJson from 'react-json-view'
 import { Link as RouterLink, useParams } from 'react-router-dom'
-import Breadcrumbs from '../../components/Breadcrumbs'
-import PageHeader from '../../components/PageHeader'
-import RequestsTable from '../../components/table'
-import { ServerConfigContainer } from '../../containers/ConfigContainer'
-import { Request, TableState } from '../../types/custom_types'
-import CacheService from '../../services/cache_service'
+import CacheService from 'services/cache_service'
+import { Request, TableState } from 'types/custom_types'
 import { formatData, outputFormatted } from './requestViewHelpers'
 
 interface RequestVariables {
@@ -192,4 +192,4 @@ const RequestView = () => {
   )
 }
 
-export default RequestView
+export { RequestView }

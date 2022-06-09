@@ -1,9 +1,9 @@
 import { Divider } from '@mui/material'
 import useAxios from 'axios-hooks'
 import { useEffect, useState } from 'react'
-import PageHeader from '../../components/PageHeader'
-import { ServerConfigContainer } from '../../containers/ConfigContainer'
-import { Job } from '../../types/custom_types'
+import { ServerConfigContainer } from 'containers/ConfigContainer'
+import PageHeader from 'components/PageHeader'
+import { Job } from 'types/custom_types'
 import { getFormattedTable } from './jobIndexHelpers'
 
 const JobIndex = () => {
@@ -30,4 +30,4 @@ const JobIndex = () => {
   )
 }
 
-export default JobIndex
+export { JobIndex }

@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 import { Filters, SortingRule } from 'react-table'
-import { SSRTable } from '../../../components/Table'
+import { SSRTable } from 'components/Table'
 import { useRequests, useRequestsIndexTableColumns } from './data'
 import { defaultOrderingColumnIndex } from './data/base-search-api'
 import type {
@@ -148,4 +148,4 @@ const RequestsIndexTable = () => {
   )
 }
 
-export default RequestsIndexTable
+export { RequestsIndexTable }

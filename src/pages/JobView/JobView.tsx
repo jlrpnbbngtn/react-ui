@@ -1,10 +1,10 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import { AxiosResponse } from 'axios'
+import PageHeader from 'components/PageHeader'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import PageHeader from '../../components/PageHeader'
-import { Job } from '../../types/custom_types'
-import { useJobServices } from '../../services/job.service/job.service'
+import { useJobServices } from 'services/job.service/job.service'
+import { Job } from 'types/custom_types'
 import JobButton from './JobButton'
 
 const JobView = () => {
@@ -54,4 +54,4 @@ const JobView = () => {
   )
 }
 
-export default JobView
+export { JobView }

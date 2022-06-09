@@ -1,4 +1,4 @@
-import { System } from '../../types/custom_types'
+import { System } from 'types/custom_types'
 import ExploreButton from './ExploreButton'
 
 const formatSystems = (systems: System[]) => {

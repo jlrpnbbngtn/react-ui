@@ -1,6 +1,6 @@
 import { Box, Checkbox, FormControlLabel } from '@mui/material'
-import Breadcrumbs from '../../../components/Breadcrumbs'
-import { Table } from '../../../components/Table'
+import Breadcrumbs from 'components/Breadcrumbs'
+import { Table } from 'components/Table'
 import { useCommands, useCommandIndexTableColums } from './data'
 
 const CommandIndexTable = () => {
@@ -31,4 +31,4 @@ const CommandIndexTable = () => {
     </Table>
   )
 }
-export default CommandIndexTable
+export { CommandIndexTable }

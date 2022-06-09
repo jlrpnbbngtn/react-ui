@@ -1,5 +1,5 @@
-import { Command, System } from '../../types/custom_types'
-import { filterSystems } from '../../services/system.service'
+import { Command, System } from 'types/custom_types'
+import { filterSystems } from 'services/system.service'
 import MakeItHappenButton from './MakeItHappenButton'
 
 const formatCommands = (commands: Command[]) => {
@@ -22,7 +22,7 @@ const getCommands = (
   systems: System[],
   namespace: string | undefined,
   systemName: string | undefined,
-  version: string | undefined
+  version: string | undefined,
 ) => {
   const filteredSystems = filterSystems(systems, {
     namespace: namespace,
