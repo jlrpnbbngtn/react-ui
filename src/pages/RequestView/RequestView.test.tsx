@@ -167,7 +167,7 @@ describe('RequestView', () => {
       expect(screen.getByText('Request View')).toBeInTheDocument()
     })
     expect(screen.getByText(mockId)).toBeInTheDocument()
-    expect(screen.getByText('remake request')).toBeInTheDocument()
+    expect(screen.getByText('Remake Request')).toBeInTheDocument()
 
     expect(screen.getByText('Command')).toBeInTheDocument()
     expect(screen.getByText('test command')).toBeInTheDocument()

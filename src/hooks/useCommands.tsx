@@ -20,7 +20,7 @@ interface IParam extends ObjectWithStringKeys {
   version: string
 }
 
-type CommandFormatter<T> = (
+export type CommandFormatter<T> = (
   systems: System[],
   includeHidden?: boolean,
   namespace?: string,
@@ -180,4 +180,4 @@ const commandsFromSystems = (
   return systemCommandPairs.map(commandMapper)
 }
 
-export { commandsFromSystems, useCommands }
+export { commandsFromSystems, commandsPairer, useCommands }
