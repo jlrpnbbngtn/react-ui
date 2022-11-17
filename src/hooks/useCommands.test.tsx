@@ -3,8 +3,9 @@ import { renderHook } from '@testing-library/react-hooks'
 import Router from 'react-router-dom'
 import { TSystem } from 'test/test-values'
 import { ConfigProviders } from 'test/testMocks'
+import { CommandIndexTableData } from 'types/custom-types'
 
-import { useCommands } from './useCommands'
+import { commandsFromSystems, useCommands } from './useCommands'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -23,9 +24,12 @@ describe('useCommands', () => {
       namespace: TSystem.namespace,
       version: TSystem.version,
     })
-    const { result } = renderHook(() => useCommands(), {
-      wrapper: ConfigProviders,
-    })
+    const { result } = renderHook(
+      () => useCommands<CommandIndexTableData>(commandsFromSystems),
+      {
+        wrapper: ConfigProviders,
+      },
+    )
     await waitFor(() => {
       expect(result.current.systemId).toEqual(TSystem.id)
     })
@@ -37,9 +41,12 @@ describe('useCommands', () => {
       namespace: TSystem.namespace,
       version: TSystem.version,
     })
-    const { result } = renderHook(() => useCommands(), {
-      wrapper: ConfigProviders,
-    })
+    const { result } = renderHook(
+      () => useCommands<CommandIndexTableData>(commandsFromSystems),
+      {
+        wrapper: ConfigProviders,
+      },
+    )
     await waitFor(() => {
       expect(result.current.systemName).toEqual(TSystem.name)
     })
@@ -51,9 +58,12 @@ describe('useCommands', () => {
       namespace: TSystem.namespace,
       version: TSystem.version,
     })
-    const { result } = renderHook(() => useCommands(), {
-      wrapper: ConfigProviders,
-    })
+    const { result } = renderHook(
+      () => useCommands<CommandIndexTableData>(commandsFromSystems),
+      {
+        wrapper: ConfigProviders,
+      },
+    )
     await waitFor(() => {
       expect(result.current.namespace).toEqual(TSystem.namespace)
     })
@@ -65,9 +75,12 @@ describe('useCommands', () => {
       namespace: TSystem.namespace,
       version: TSystem.version,
     })
-    const { result } = renderHook(() => useCommands(), {
-      wrapper: ConfigProviders,
-    })
+    const { result } = renderHook(
+      () => useCommands<CommandIndexTableData>(commandsFromSystems),
+      {
+        wrapper: ConfigProviders,
+      },
+    )
     await waitFor(() => {
       expect(result.current.version).toEqual(TSystem.version)
     })

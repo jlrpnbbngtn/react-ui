@@ -4,9 +4,10 @@ import { Divider } from 'components/Divider'
 import { PageHeader } from 'components/PageHeader'
 import { Table } from 'components/Table'
 import { PermissionsContainer } from 'containers/PermissionsContainer'
-import { useCommands } from 'hooks/useCommands'
+import { commandsFromSystems, useCommands } from 'hooks/useCommands'
 import { useCommandIndexTableColumns } from 'pages/CommandIndex'
 import { useEffect, useState } from 'react'
+import { CommandIndexTableData } from 'types/custom-types'
 
 const CommandIndex = () => {
   const { hasSystemPermission } = PermissionsContainer.useContainer()
@@ -18,7 +19,7 @@ const CommandIndex = () => {
     version,
     includeHidden,
     hiddenOnChange,
-  } = useCommands()
+  } = useCommands<CommandIndexTableData>(commandsFromSystems)
   const [permission, setPermission] = useState(false)
 
   useEffect(() => {

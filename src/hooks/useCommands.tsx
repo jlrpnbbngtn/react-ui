@@ -1,5 +1,4 @@
-import useAxios from 'axios-hooks'
-import { ServerConfigContainer } from 'containers/ConfigContainer'
+import { useSystems } from 'hooks/useSystems'
 import { ExecuteButton } from 'pages/CommandIndex'
 import {
   ChangeEvent as ReactChangeEvent,
@@ -21,37 +20,33 @@ interface IParam extends ObjectWithStringKeys {
   version: string
 }
 
-export const useCommands = () => {
-  const { authEnabled } = ServerConfigContainer.useContainer()
-  const [commands, setCommands] = useState<CommandIndexTableData[]>([])
+type CommandFormatter<T> = (
+  systems: System[],
+  includeHidden?: boolean,
+  namespace?: string,
+  systemName?: string,
+  version?: string,
+) => T[]
+
+const useCommands = <T,>(formatter: CommandFormatter<T>) => {
+  const [commands, setCommands] = useState<T[]>([])
   const [systemId, setSystemId] = useState('')
   const [includeHidden, setIncludeHidden] = useState(false)
   const { namespace, systemName, version } = useParams() as IParam
-
-  const [{ data, error }] = useAxios({
-    url: '/api/v1/systems',
-    method: 'get',
-    withCredentials: authEnabled,
-  })
+  const { getSystems } = useSystems()
 
   useEffect(() => {
-    if (data && !error) {
+    getSystems().then((response) => {
       setCommands(
-        commandsFromSystems(
-          data,
-          includeHidden,
-          namespace,
-          systemName,
-          version,
-        ),
+        formatter(response.data, includeHidden, namespace, systemName, version),
       )
-
-      const foundSystem = data.find(
+      const foundSystem = response.data.find(
         (system: System) => system.name === systemName,
       )
       if (foundSystem) setSystemId(foundSystem.id)
-    }
-  }, [data, error, namespace, version, systemName, includeHidden])
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [namespace, version, systemName, includeHidden])
 
   const hiddenOnChange = useCallback(
     (event: ReactChangeEvent<HTMLInputElement>) => {
@@ -134,7 +129,7 @@ const commandsPairer = (system: System): Array<SystemCommandPair> => {
  */
 const commandsFromSystems = (
   systems: System[],
-  includeHidden = false,
+  includeHidden?: boolean,
   namespace?: string,
   systemName?: string,
   version?: string,
@@ -184,3 +179,5 @@ const commandsFromSystems = (
 
   return systemCommandPairs.map(commandMapper)
 }
+
+export { commandsFromSystems, useCommands }

@@ -6,7 +6,7 @@ import { ModalWrapper } from 'components/ModalWrapper'
 import { PageHeader } from 'components/PageHeader'
 import { Table } from 'components/Table'
 import { useBlockList } from 'hooks/useBlockList'
-import { useCommands } from 'hooks/useCommands'
+import { commandsFromSystems, useCommands } from 'hooks/useCommands'
 import { useModalColumns, useTableColumns } from 'pages/CommandBlocklistView'
 import { useMemo, useState } from 'react'
 import { BlockedCommand } from 'types/backend-types'
@@ -16,7 +16,7 @@ export const CommandBlocklistView = () => {
   const [open, setOpen] = useState(false)
   const [selection, setSelection] = useState<CommandIndexTableData[]>([])
   const { blockList, deleteBlockList, addBlockList } = useBlockList()
-  const { commands } = useCommands()
+  const { commands } = useCommands<CommandIndexTableData>(commandsFromSystems)
 
   // populate data for modal All Commands list table
   const commandListData = useMemo((): CommandIndexTableData[] => {
