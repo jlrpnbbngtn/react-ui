@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup } from '@mui/material'
 import { ErrorSchema, FormValidation, IChangeEvent } from '@rjsf/core'
-import { MuiForm5 as Form } from '@rjsf/material-ui'
+import { MuiForm5 as RjsfForm } from '@rjsf/material-ui'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import useAxios from 'axios-hooks'
 import { JsonCard } from 'components/JsonCard'
@@ -42,6 +42,7 @@ interface CommandViewFormProps {
     formData: T,
     errors: FormValidation,
   ) => FormValidation
+  isReplay?: boolean
 }
 
 type BytesParametersContextType = {
@@ -63,6 +64,7 @@ const CommandViewForm = ({
   command,
   isJob,
   validator,
+  isReplay,
 }: CommandViewFormProps) => {
   const [submitStatus, setSubmitStatus] = useState<SnackbarState | undefined>(
     undefined,
@@ -202,7 +204,7 @@ const CommandViewForm = ({
         <BytesParameterContext.Provider
           value={{ fileMetaData, setFileMetaData }}
         >
-          <Form
+          <RjsfForm
             schema={schema}
             uiSchema={uiSchema}
             formData={model}
@@ -216,7 +218,7 @@ const CommandViewForm = ({
               <Button onClick={onResetForm}>Reset</Button>
               <Button type="submit">{isJob ? 'Schedule' : 'Execute'}</Button>
             </ButtonGroup>
-          </Form>
+          </RjsfForm>
         </BytesParameterContext.Provider>
       </Box>
       <Box pl={1} width={2 / 5} style={{ verticalAlign: 'top' }}>

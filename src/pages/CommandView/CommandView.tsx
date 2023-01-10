@@ -100,6 +100,7 @@ const CommandView = () => {
           command={theCommand}
           isJob={isJob}
           validator={validator}
+          isReplay={isReplay}
         />
       </Box>
       {debugEnabled && (
